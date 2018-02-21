@@ -57,7 +57,7 @@ func downloadTweets() {
 
 func getTweets() []Tweet {
 	tweets := make([]Tweet, 0)
-	raw, err := ioutil.ReadFile("./tweets.json")
+	raw, err := ioutil.ReadFile("./tweets/tweets.json")
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
@@ -231,7 +231,7 @@ func serveToWeb(tweets []Tweet, analysisStrings analysisStrings) {
 
 func main() {
 
-	downloadTweets()
+	//downloadTweets()
 
 	tweets := getTweets()
 	analyzeSentimentSingle(tweets)
