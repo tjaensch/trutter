@@ -1,0 +1,158 @@
+{{define "index"}}<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trutter</title>
+<meta name="description" content="@realDonaldTrump Tweets Sentiment Analysis App">
+<meta name="generator" content="Hugo 0.36" />
+<meta name="twitter:image" content="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" />
+<meta property="og:type"          content="website" />
+<meta property="og:image"         content="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" />
+<meta property="og:title" content="Trutter - @realDonaldTrump Sentiment Analysis" />
+<meta property="og:description" content="Sounds like President Trump is in a rather {{ .OverallSentimentAdjective }} mood lately." />
+<meta property="og:url" content="http://trutter.us/" />
+<meta property="og:updated_time" content="{{ .Date }}T00:00:00&#43;00:00"/>
+<link rel="alternate" type="application/rss+xml" title="Mainroad Feed" href="https://themes.gohugo.io/theme/mainroad/index.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700" type="text/css" media="all" />
+<link rel="stylesheet" href="public/css/style.css" type="text/css" media="all" />
+<script type="text/javascript" src="public/js/scripts.js"></script>
+<link rel="shortcut icon" href="https://themes.gohugo.io/theme/mainroad/favicon.ico">
+
+</head>
+<body class="body body-right-sidebar mobile" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+  
+  <!-- Facebook share button -->
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+	
+	<div class="container container-outer">
+		<header class="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+			<div class="container container-inner clearfix">
+				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
+					<a class="logo__link" href="http://www.trutter.us/" title="Trutter" rel="home">
+						<h1 class="logo__title">Trutter</h1>
+						<h2 class="logo__tagline">Find out how President Trump feels today without actually having to read his Tweets</h2>
+					</a>
+				</div>
+			  <hr class="divider">
+			</div>
+   
+		</header>
+		<div class="wrapper clearfix">
+
+<main class="main-content list content" role="main">
+  <article class="list__item post clearfix">
+	<figure class="list__thumbnail">
+		<a href="https://twitter.com/realDonaldTrump">
+			<img src="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" alt="(Hu)go Template Primer" />
+		</a>
+	</figure>
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h1 class="list__title post__title ">
+				Overall sentiment: {{ .OverallSentiment }}! President Trump sounds rather {{ .OverallSentimentAdjective }} lately.
+			</h1>
+		</header>
+	</div>
+
+</article>
+<article class="list__item post clearfix">
+	<div class="list__content clearfix">
+		<header class="list__header">
+			<h3 class="list__title post__title ">
+				<a href="https://twitter.com/realDonaldTrump" target="_blank">@realDonaldTrump Latest Tweets</a>
+			</h3>
+			<div class="list__meta meta">
+				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
+				<time class="list__meta-date" datetime="2014-04-02T00:00:00">{{ .Date }}</time>
+			</div>
+		</header>
+		<div class="list__excerpt">
+		  <ul>
+		  	{{range .Tweets}}
+	            <li>
+	            <strong>Sentiment {{.Sentiment}}</strong>
+	            <br>
+	            {{.Text}}
+	            <br>
+	            <a href="https://twitter.com/realDonaldTrump/status/{{.Id}}" target="_blank">https://twitter.com/realDonaldTrump/status/{{.Id}}</a>
+	            </li>
+	            <br>
+           {{end}}
+		  
+		  </ul>
+		</div>
+	</div>
+</article>
+
+</main>
+
+<aside class="sidebar" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+	
+<div class="widget-recent widget">
+	<h4 class="widget__title">How it works</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">The app performs sentiment analysis on the combined 5 latest Tweets by President Trump via the <a class="widget__link" href="https://cloud.google.com/natural-language/" target="_blank">Google Cloud Natural Language API</a> to capture the overall sentiment and the mood the leader of the free world is most likely in today.</li>
+		</ul>
+	</div>
+</div>
+
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social Media</h4>
+    <div class="fb-share-button" data-href="http://www.trutter.us/" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.trutter.us%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+	<br><br>
+	<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=@realDonaldTrump%20Sentiment%20Analysis%20-%20President%20Trump%20seems%20to%20be%20in%20a%20rather%20{{ .OverallSentimentAdjective }}%20mood%20lately." data-size="large"></a>
+</div>
+	
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget__link widget__link--taglist" href="https://en.wikipedia.org/wiki/Sentiment_analysis" title="sentiment analysis" target="_blank">Sentiment Analysis</a>
+		<a class="widget__link widget__link--taglist" href="https://twitter.com/" title="twitter" target="_blank">Twitter</a>
+		<a class="widget__link widget__link--taglist" href="https://en.wikipedia.org/wiki/Artificial_intelligence" title="artificial intelligence" target="_blank">Artificial Intelligence</a>
+	    <a class="widget__link widget__link--taglist" href="https://en.wikipedia.org/wiki/Natural-language_processing" title="natural language processing" target="_blank">Natural Language Processing</a>
+	</div>
+</div>
+</aside>
+
+	</div>
+		<footer class="footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+			<div class="container container-inner">
+				<p class="footer__copyright">&copy; 2018 <a href="https://twitter.com/tebugging" target="_blank">@tebugging</a> <span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad theme</a>.</span></p>
+			</div>
+		</footer>
+	</div>
+
+<script>
+	var navigation = responsiveNav(".menu", {
+		navClass: "menu--collapse",
+	});
+</script>
+
+<!-- Twitter JS -->
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+</body>
+</html>{{end}}
