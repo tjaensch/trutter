@@ -44,9 +44,9 @@ func getCurrentDate() string {
 }
 
 func downloadTweets() {
-	out, _ := os.Create("tweets.json")
+	out, _ := os.Create("./tweets/tweets.json")
 	defer out.Close()
-	resp, _ := http.Get("http://35.231.114.195/")
+	resp, _ := http.Get("http://35.229.87.102/")
 	defer resp.Body.Close()
 	_, err := io.Copy(out, resp.Body)
 	if err != nil {
@@ -231,7 +231,7 @@ func serveToWeb(tweets []Tweet, analysisStrings analysisStrings) {
 
 func main() {
 
-	//downloadTweets()
+	downloadTweets()
 
 	tweets := getTweets()
 	analyzeSentimentSingle(tweets)
