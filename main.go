@@ -69,8 +69,10 @@ func countTweets(tweets []Tweet) int {
 	return len(tweets)
 }
 
-func analyzeSentimentSingle(tweets []Tweet) {
+func analyzeSentimentSingle(tweets []Tweet) (int, int) {
 	ctx := context.Background()
+	countPositive := 0
+	countNegative := 0
 
 	// Creates a client.
 	client, err := language.NewClient(ctx)
@@ -103,12 +105,15 @@ func analyzeSentimentSingle(tweets []Tweet) {
 		fmt.Println(sentiment.DocumentSentiment.Score)
 		if sentiment.DocumentSentiment.Score >= 0 {
 			fmt.Println("Sentiment: positive")
+			countPositive++
 			tweets[i].Sentiment = "positive"
 		} else {
 			fmt.Println("Sentiment: negative")
+			countNegative++
 			tweets[i].Sentiment = "negative"
 		}
 	}
+	return countPositive, countNegative
 }
 
 func analyzeSentimentAll(tweets []Tweet) (bool, float32) {
@@ -207,15 +212,17 @@ func getBottomLineSentiment(allTweetsAnalysisPositive bool, sentimentScore float
 	return analysisStrings{OverallSentiment: analysisResults[0], OverallSentimentAdjective: analysisResults[1]}
 }
 
-func serveToWeb(tweets []Tweet) {
+func serveToWeb(tweets []Tweet, positiveTweets int, negativeTweets int) {
 	data := data{
 		tweets,
 	}
 
 	templateData := map[string]interface{}{
-		"Tweets":     data.tweets,
-		"Date":       getCurrentDate(),
-		"TweetCount": countTweets(tweets),
+		"Tweets":         data.tweets,
+		"Date":           getCurrentDate(),
+		"TweetCount":     countTweets(tweets),
+		"PositiveTweets": positiveTweets,
+		"NegativeTweets": negativeTweets,
 	}
 
 	fs := http.FileServer(http.Dir("public"))
@@ -235,8 +242,8 @@ func main() {
 	downloadTweets()
 
 	tweets := getTweets()
-	analyzeSentimentSingle(tweets)
+	positiveTweets, negativeTweets := analyzeSentimentSingle(tweets)
 
-	serveToWeb(tweets)
+	serveToWeb(tweets, positiveTweets, negativeTweets)
 
 }

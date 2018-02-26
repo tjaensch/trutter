@@ -9,8 +9,8 @@
 <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" />
 <meta property="og:type"          content="website" />
 <meta property="og:image"         content="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" />
-<meta property="og:title" content="Trutter - @realDonaldTrump Sentiment Analysis" />
-<meta property="og:description" content="Sounds like President Trump is in a rather {{ .OverallSentimentAdjective }} mood lately." />
+<meta property="og:title" content="Trutter" />
+<meta property="og:description" content="@realDonaldTrump Sentiment Analysis" />
 <meta property="og:url" content="http://trutter.us/" />
 <meta property="og:updated_time" content="{{ .Date }}T00:00:00&#43;00:00"/>
 <link rel="alternate" type="application/rss+xml" title="Mainroad Feed" href="https://themes.gohugo.io/theme/mainroad/index.xml">
@@ -38,7 +38,7 @@
 				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
 					<a class="logo__link" href="http://www.trutter.us/" title="Trutter" rel="home">
 						<h1 class="logo__title">Trutter</h1>
-						<h2 class="logo__tagline">@realDonaldTrump Tweets sentiment analysis with Google Cloud's Natural Language Processing API</h2>
+						<h2 class="logo__tagline">@realDonaldTrump Twitter sentiment analysis with Google Cloud's Natural Language Processing API</h2>
 					</a>
 				</div>
 			  <hr class="divider">
@@ -57,7 +57,7 @@
 	<div class="list__content clearfix">
 		<header class="list__header">
 			<h1 class="list__title post__title ">
-				Tweet count: {{ .TweetCount }}
+				Out of President Trump's last {{ .TweetCount }} Tweets, {{ .PositiveTweets }} had a positive sentiment, {{ .NegativeTweets }} were negative.
 			</h1>
 		</header>
 	</div>
