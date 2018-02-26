@@ -34,8 +34,7 @@ type analysisStrings struct {
 }
 
 type data struct {
-	analysisStrings analysisStrings
-	tweets          []Tweet
+	tweets []Tweet
 }
 
 func getCurrentDate() string {
@@ -67,7 +66,6 @@ func getTweets() []Tweet {
 }
 
 func countTweets(tweets []Tweet) int {
-	fmt.Println(len(tweets))
 	return len(tweets)
 }
 
@@ -209,17 +207,15 @@ func getBottomLineSentiment(allTweetsAnalysisPositive bool, sentimentScore float
 	return analysisStrings{OverallSentiment: analysisResults[0], OverallSentimentAdjective: analysisResults[1]}
 }
 
-func serveToWeb(tweets []Tweet, analysisStrings analysisStrings) {
+func serveToWeb(tweets []Tweet) {
 	data := data{
-		analysisStrings,
 		tweets,
 	}
 
 	templateData := map[string]interface{}{
-		"OverallSentiment":          data.analysisStrings.OverallSentiment,
-		"OverallSentimentAdjective": data.analysisStrings.OverallSentimentAdjective,
-		"Tweets":                    data.tweets,
-		"Date":                      getCurrentDate(),
+		"Tweets":     data.tweets,
+		"Date":       getCurrentDate(),
+		"TweetCount": countTweets(tweets),
 	}
 
 	fs := http.FileServer(http.Dir("public"))
@@ -236,18 +232,11 @@ func serveToWeb(tweets []Tweet, analysisStrings analysisStrings) {
 
 func main() {
 
-		downloadTweets()
+	downloadTweets()
 
-		tweets := getTweets()
-		analyzeSentimentSingle(tweets)
-		allTweetsAnalysisPositive, sentimentScore := analyzeSentimentAll(tweets)
+	tweets := getTweets()
+	analyzeSentimentSingle(tweets)
 
-		bottomLineFeelings := getBottomLineSentiment(allTweetsAnalysisPositive, sentimentScore)
-
-		fmt.Println(bottomLineFeelings)
-		
-		countTweets(tweets)
-
-		serveToWeb(tweets, bottomLineFeelings)
+	serveToWeb(tweets)
 
 }
