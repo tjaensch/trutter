@@ -38,7 +38,7 @@
 				<div class="logo" role="banner" itemscope="itemscope" itemtype="http://schema.org/Brand">
 					<a class="logo__link" href="http://www.trutter.us/" title="Trutter" rel="home">
 						<h1 class="logo__title">Trutter</h1>
-						<h2 class="logo__tagline">Find out how President Trump feels today without actually having to read his Tweets</h2>
+						<h2 class="logo__tagline">@realDonaldTrump Tweets sentiment analysis with Google Cloud's Natural Language Processing API</h2>
 					</a>
 				</div>
 			  <hr class="divider">
@@ -67,11 +67,11 @@
 	<div class="list__content clearfix">
 		<header class="list__header">
 			<h3 class="list__title post__title ">
-				<a href="https://twitter.com/realDonaldTrump" target="_blank">@realDonaldTrump Latest Tweets</a>
+				<a href="https://twitter.com/realDonaldTrump" target="_blank">@realDonaldTrump Tweets</a>
 			</h3>
 			<div class="list__meta meta">
 				<svg class="icon icon-time" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8-.0000003c-4.4 0-8 3.6-8 8 0 4.4000003 3.6 8.0000003 8 8.0000003 4.4 0 8-3.6 8-8.0000003 0-4.4-3.6-8-8-8zm0 14.4000003c-3.52 0-6.4-2.88-6.4-6.4000003 0-3.52 2.88-6.4 6.4-6.4 3.52 0 6.4 2.88 6.4 6.4 0 3.5200003-2.88 6.4000003-6.4 6.4000003zm.4-10.4000003h-1.2v4.8l4.16 2.5600003.64-1.04-3.6-2.1600003z"/></svg>
-				<time class="list__meta-date" datetime="2014-04-02T00:00:00">{{ .Date }}</time>
+				<time class="list__meta-date" datetime="2014-04-02T00:00:00">Last updated {{ .Date }}</time>
 			</div>
 		</header>
 		<div class="list__excerpt">
@@ -100,14 +100,14 @@
 	<h4 class="widget__title">How it works</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item">The app performs sentiment analysis on the combined 5 latest Tweets by President Trump via the <a class="widget__link" href="https://cloud.google.com/natural-language/" target="_blank">Google Cloud Natural Language API</a> to capture the overall sentiment and the mood the leader of the free world is most likely in today.</li>
+			<li class="widget__item">The app performs sentiment analysis on the Tweets by President Trump via the <a class="widget__link" href="https://cloud.google.com/natural-language/" target="_blank">Google Cloud Natural Language API</a> to capture the overall sentiment of the leader of the free world's recent ramblings.</li>
 		</ul>
 	</div>
 </div>
 
 <div class="widget-social widget">
 	<h4 class="widget-social__title widget__title">Social Media</h4>
-    <div class="fb-share-button" data-href="http://www.trutter.us/" data-layout="button_count" data-size="large" data-mobile-iframe="false"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.trutter.us%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
 	<br><br>
 	<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=@realDonaldTrump%20Sentiment%20Analysis%20-%20President%20Trump%20seems%20to%20be%20in%20a%20rather%20{{ .OverallSentimentAdjective }}%20mood%20lately." data-size="large"></a>
 </div>

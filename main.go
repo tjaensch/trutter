@@ -66,6 +66,11 @@ func getTweets() []Tweet {
 	return tweets
 }
 
+func countTweets(tweets []Tweet) int {
+	fmt.Println(len(tweets))
+	return len(tweets)
+}
+
 func analyzeSentimentSingle(tweets []Tweet) {
 	ctx := context.Background()
 
@@ -231,15 +236,18 @@ func serveToWeb(tweets []Tweet, analysisStrings analysisStrings) {
 
 func main() {
 
-	downloadTweets()
+		downloadTweets()
 
-	tweets := getTweets()
-	analyzeSentimentSingle(tweets)
-	allTweetsAnalysisPositive, sentimentScore := analyzeSentimentAll(tweets)
+		tweets := getTweets()
+		analyzeSentimentSingle(tweets)
+		allTweetsAnalysisPositive, sentimentScore := analyzeSentimentAll(tweets)
 
-	bottomLineFeelings := getBottomLineSentiment(allTweetsAnalysisPositive, sentimentScore)
+		bottomLineFeelings := getBottomLineSentiment(allTweetsAnalysisPositive, sentimentScore)
 
-	fmt.Println(bottomLineFeelings)
+		fmt.Println(bottomLineFeelings)
+		
+		countTweets(tweets)
 
-	serveToWeb(tweets, bottomLineFeelings)
+		serveToWeb(tweets, bottomLineFeelings)
+
 }
