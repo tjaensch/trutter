@@ -45,7 +45,7 @@ func getCurrentDate() string {
 func downloadTweets() {
 	out, _ := os.Create("./tweets/tweets.json")
 	defer out.Close()
-	resp, _ := http.Get("http://35.229.87.102/")
+	resp, _ := http.Get("http://35.196.57.86/")
 	defer resp.Body.Close()
 	_, err := io.Copy(out, resp.Body)
 	if err != nil {
