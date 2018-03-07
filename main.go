@@ -69,9 +69,10 @@ func countTweets(tweets []Tweet) int {
 	return len(tweets)
 }
 
-func analyzeSentimentSingle(tweets []Tweet) (int, int) {
+func analyzeSentimentSingle(tweets []Tweet) (int, int, int) {
 	ctx := context.Background()
 	countPositive := 0
+	countNeutral := 0
 	countNegative := 0
 
 	// Creates a client.
@@ -103,17 +104,21 @@ func analyzeSentimentSingle(tweets []Tweet) (int, int) {
 
 		fmt.Printf("Text: %v\n", text)
 		fmt.Println(sentiment.DocumentSentiment.Score)
-		if sentiment.DocumentSentiment.Score >= 0 {
+		if sentiment.DocumentSentiment.Score > 0 {
 			fmt.Println("Sentiment: positive")
 			countPositive++
 			tweets[i].Sentiment = "positive"
+		} else if sentiment.DocumentSentiment.Score == 0 {
+			fmt.Println("Sentiment: neutral")
+			countNeutral++
+			tweets[i].Sentiment = "neutral"
 		} else {
 			fmt.Println("Sentiment: negative")
 			countNegative++
 			tweets[i].Sentiment = "negative"
 		}
 	}
-	return countPositive, countNegative
+	return countPositive, countNeutral, countNegative
 }
 
 func analyzeSentimentAll(tweets []Tweet) (bool, float32) {
@@ -212,7 +217,7 @@ func getBottomLineSentiment(allTweetsAnalysisPositive bool, sentimentScore float
 	return analysisStrings{OverallSentiment: analysisResults[0], OverallSentimentAdjective: analysisResults[1]}
 }
 
-func serveToWeb(tweets []Tweet, positiveTweets int, negativeTweets int) {
+func serveToWeb(tweets []Tweet, positiveTweets int, neutralTweets int, negativeTweets int) {
 	data := data{
 		tweets,
 	}
@@ -222,6 +227,7 @@ func serveToWeb(tweets []Tweet, positiveTweets int, negativeTweets int) {
 		"Date":           getCurrentDate(),
 		"TweetCount":     countTweets(tweets),
 		"PositiveTweets": positiveTweets,
+		"NeutralTweets":  neutralTweets,
 		"NegativeTweets": negativeTweets,
 	}
 
@@ -242,8 +248,8 @@ func main() {
 	downloadTweets()
 
 	tweets := getTweets()
-	positiveTweets, negativeTweets := analyzeSentimentSingle(tweets)
+	positiveTweets, neutralTweets, negativeTweets := analyzeSentimentSingle(tweets)
 
-	serveToWeb(tweets, positiveTweets, negativeTweets)
+	serveToWeb(tweets, positiveTweets, neutralTweets, negativeTweets)
 
 }
